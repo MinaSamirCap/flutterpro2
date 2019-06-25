@@ -4,7 +4,7 @@ import 'package:flutter_course_2/products.dart';
 class ProductManager extends StatefulWidget {
   final String startingPorduct;
 
-  ProductManager(this.startingPorduct) {
+  ProductManager({this.startingPorduct = 'Sweet Taster.'}) {
     print('[ProductManager] Constructor');
   }
 
