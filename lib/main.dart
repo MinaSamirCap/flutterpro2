@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2/product_manager.dart';
 import 'package:flutter_course_2/products.dart';
+import 'package:flutter_course_2/tasks/task1.dart';
 
-void main() => runApp(MyApp()); // one line function only ...
+void main() => runApp(Task1()); // one line function only ...
 
 class MyApp extends StatelessWidget {
   @override
