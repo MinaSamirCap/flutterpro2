@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2/product_control.dart';
 import 'package:flutter_course_2/products.dart';
 
 class ProductManager extends StatefulWidget {
@@ -20,8 +21,8 @@ class _ProductManagerState extends State<ProductManager> {
 
   @override
   void initState() {
-
     print('[_ProductManagerState] initState()');
+
     /// we use widget property to access anything from the StatefulWidget
     /// that this state belongs to ...
     _products.add(widget.startingPorduct);
@@ -33,10 +34,17 @@ class _ProductManagerState extends State<ProductManager> {
     /// the data already got their values ..
   }
 
+  void _addProduct(String product) {
+    setState(() {
+      /// setState will only call build method and will not reConstruct the all widget
+      _products.add(product);
+    });
+  }
+
   @override
   void didUpdateWidget(ProductManager oldWidget) {
-     print('[_ProductManagerState] didUpdateWidget()');
-     print('[_ProductManagerState] didUpdateWidget() ${_products.length}');
+    print('[_ProductManagerState] didUpdateWidget()');
+    print('[_ProductManagerState] didUpdateWidget() ${_products.length}');
     super.didUpdateWidget(oldWidget);
   }
 
@@ -46,15 +54,7 @@ class _ProductManagerState extends State<ProductManager> {
     return Column(children: <Widget>[
       Container(
         margin: EdgeInsets.all(10.0),
-        child: RaisedButton(
-          onPressed: () {
-            setState(() {
-              /// setState will only call build method and will not reConstruct the all widget
-              _products.add('Adbanded Taster');
-            });
-          },
-          child: Text('Add Product'),
-        ),
+        child: ProductControl(addProduct: _addProduct),
       ),
       Products(_products)
     ]);
