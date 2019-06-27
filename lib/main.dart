@@ -5,9 +5,9 @@ import 'package:flutter_course_2/products.dart';
 import 'package:flutter_course_2/tasks/task1.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
-  debugPaintBaselinesEnabled = true;
-  debugPaintPointersEnabled = true;
+  //debugPaintSizeEnabled = true;
+  //debugPaintBaselinesEnabled = true;
+  //debugPaintPointersEnabled = true;
   runApp(MyApp()); // one line function only ...
 }
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowMaterialGrid: true,
+      //debugShowMaterialGrid: true,
         theme:
             ThemeData(brightness: Brightness.dark, primaryColor: Colors.amber),
         home: Scaffold(
