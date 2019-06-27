@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               title: Text('EasyList'),
             ),
             body: ProductManager(
-              startingPorduct: 'MonMon',
+              /* startingPorduct: 'MonMon', */
             )));
   }
 

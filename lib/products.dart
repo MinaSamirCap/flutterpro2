@@ -21,9 +21,9 @@ class Products extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('[Product Widget] build() ${_products.length}');
-    return ListView.builder(
+    return _products.length > 0 ? ListView.builder(
       itemBuilder: _buildProductItem,
       itemCount: _products.length,
-    );
+    ) : Center(child: Text("No added Product"));
   }
 }
