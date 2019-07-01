@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_course_2/pages/home.dart';
 import 'package:flutter_course_2/product_manager.dart';
 import 'package:flutter_course_2/products.dart';
 import 'package:flutter_course_2/tasks/task1.dart';
@@ -15,16 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //debugShowMaterialGrid: true,
+        //debugShowMaterialGrid: true,
         theme:
             ThemeData(brightness: Brightness.dark, primaryColor: Colors.amber),
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('EasyList'),
-            ),
-            body: ProductManager(
-              /* startingPorduct: 'MonMon', */
-            )));
+        home: HomePage());
   }
 
   // @override
