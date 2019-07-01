@@ -22,7 +22,7 @@ class ProductPage extends StatelessWidget {
               child: FlatButton(
                 color: Theme.of(context).accentColor,
                 child: Text('BACK'),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context, true),
               ),
             padding: EdgeInsets.all(10.0),)
           ],

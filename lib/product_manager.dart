@@ -44,6 +44,13 @@ class _ProductManagerState extends State<ProductManager> {
     });
   }
 
+  void _deleteProduct(int index) {
+    setState(() {
+      /// setState will only call build method and will not reConstruct the all widget
+      _products.removeAt(index);
+    });
+  }
+
   @override
   void didUpdateWidget(ProductManager oldWidget) {
     print('[_ProductManagerState] didUpdateWidget()');
@@ -59,7 +66,7 @@ class _ProductManagerState extends State<ProductManager> {
         margin: EdgeInsets.all(10.0),
         child: ProductControl(addProduct: _addProduct),
       ),
-      Expanded(child: Products(_products))
+      Expanded(child: Products(_products, deleteProduct: _deleteProduct,))
     ]);
   }
 }
