@@ -3,7 +3,7 @@ import 'package:flutter_course_2/product_control.dart';
 import 'package:flutter_course_2/products.dart';
 
 class ProductManager extends StatefulWidget {
-  final String startingPorduct;
+  final Map<String, String> startingPorduct;
 
   ProductManager({this.startingPorduct}) {
     print('[ProductManager] Constructor');
@@ -17,7 +17,7 @@ class ProductManager extends StatefulWidget {
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map<String, String>> _products = [];
 
   @override
   void initState() {
@@ -25,10 +25,9 @@ class _ProductManagerState extends State<ProductManager> {
 
     /// we use widget property to access anything from the StatefulWidget
     /// that this state belongs to ...
-    
-    if(widget.startingPorduct != null) {
-      _products.add(widget.startingPorduct);
 
+    if (widget.startingPorduct != null) {
+      _products.add(widget.startingPorduct);
     }
 
     super.initState();
@@ -38,7 +37,7 @@ class _ProductManagerState extends State<ProductManager> {
     /// the data already got their values ..
   }
 
-  void _addProduct(String product) {
+  void _addProduct(Map<String, String> product) {
     setState(() {
       /// setState will only call build method and will not reConstruct the all widget
       _products.add(product);
