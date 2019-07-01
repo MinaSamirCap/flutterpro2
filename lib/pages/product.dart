@@ -7,17 +7,21 @@ class ProductPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Product Details'),
       ),
-      body: Center(
-        child: Column(
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('on product page'),
-            FlatButton(
-              child: Text('BACK'),
-              onPressed: () => Navigator.pop(context),
-            )
+            Image.asset('assets/food.jpg'),
+            Container(child: Text('on product page'), padding: EdgeInsets.all(10.0),),
+            Container(
+              child: FlatButton(
+                color: Theme.of(context).accentColor,
+                child: Text('BACK'),
+                onPressed: () => Navigator.pop(context),
+              ),
+            padding: EdgeInsets.all(10.0),)
           ],
         ),
-      ),
+      
     );
   }
 }
