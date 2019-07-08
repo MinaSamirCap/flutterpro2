@@ -31,11 +31,24 @@ class MyApp2 extends StatefulWidget {
 
 // this line State<MyApp2> says that this state belongs to MyApp2 Class
 class _MyApp2State extends State<MyApp2> {
-  var _questions = [
-    "What is your favorite color?",
-    "What is your favorite animal?"
-  ];
   int _questionIndex = 0;
+
+  /// List<Map<String, Object>>
+  var _questions = [
+    {
+      'questionText': 'What is your favorite color?',
+      'answers': ['black', 'white', 'blue']
+    },
+    {
+      'questionText': 'What is your favorite animal?',
+      'answers': ['dog', 'cat', 'duk']
+    },
+    {
+      'questionText': 'What is your favorite instructor?',
+      'answers': ['max', 'paulo', 'nermu']
+    }
+  ];
+
   void _answerChosen() {
     setState(() {
       _questionIndex++;
@@ -52,10 +65,10 @@ class _MyApp2State extends State<MyApp2> {
         ),
         body: Column(
           children: <Widget>[
-            Question(_questions.elementAt(_questionIndex)),
-            Answer(selectHandler: _answerChosen, title: 'Answer1'),
-            Answer(selectHandler: _answerChosen, title: 'Answer2'),
-            Answer(selectHandler: _answerChosen, title: 'Answer3'),
+            Question(_questions.elementAt(_questionIndex)['questionText']),
+            ...(_questions[_questionIndex]['answers'] as List<String>).map((answer) {
+              return Answer(title: answer, selectHandler: _answerChosen);
+            }).toList(),
           ],
         ),
       ),
