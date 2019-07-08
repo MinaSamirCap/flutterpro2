@@ -3,8 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_course_2/pages/home.dart';
 import 'package:flutter_course_2/product_manager.dart';
 import 'package:flutter_course_2/products.dart';
-import 'package:flutter_course_2/questions.dart';
 import 'package:flutter_course_2/tasks/task1.dart';
+
+import 'updatedcourse/answer.dart';
+import 'updatedcourse/question.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -51,20 +53,9 @@ class _MyApp2State extends State<MyApp2> {
         body: Column(
           children: <Widget>[
             Question(_questions.elementAt(_questionIndex)),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: _answerChosen,
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: () => print("Answer Chosen 2"),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () {
-                print("Answer chosen 3");
-              },
-            )
+            Answer(selectHandler: _answerChosen, title: 'Answer1'),
+            Answer(selectHandler: _answerChosen, title: 'Answer2'),
+            Answer(selectHandler: _answerChosen, title: 'Answer3'),
           ],
         ),
       ),
