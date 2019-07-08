@@ -9,9 +9,45 @@ void main() {
   //debugPaintSizeEnabled = true;
   //debugPaintBaselinesEnabled = true;
   //debugPaintPointersEnabled = true;
-  runApp(MyApp()); // one line function only ...
+  runApp(MyApp2()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2
+}
+
+class MyApp2 extends StatelessWidget {
+  void answerChosen() {
+    print("answer chosen");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: Column(
+          children: <Widget>[
+            Text("this is my quiestion"),
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: answerChosen,
+            ),
+             RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: () => print("Answer Chosen 2"),
+            ),
+             RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: (){
+                print("Answer chosen 3");
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
