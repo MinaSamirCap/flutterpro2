@@ -22,20 +22,20 @@ void main() {
 class MyApp2 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyApp2State();
+    return _MyApp2State();
   }
 }
 
 // this line State<MyApp2> says that this state belongs to MyApp2 Class
-class MyApp2State extends State<MyApp2> {
-  var questions = [
+class _MyApp2State extends State<MyApp2> {
+  var _questions = [
     "What is your favorite color?",
     "What is your favorite animal?"
   ];
-  int questionIndex = 0;
-  void answerChosen() {
+  int _questionIndex = 0;
+  void _answerChosen() {
     setState(() {
-      questionIndex++;
+      _questionIndex++;
     });
     print("answer chosen");
   }
@@ -49,10 +49,10 @@ class MyApp2State extends State<MyApp2> {
         ),
         body: Column(
           children: <Widget>[
-            Text(questions.elementAt(questionIndex)),
+            Text(_questions.elementAt(_questionIndex)),
             RaisedButton(
               child: Text('Answer 1'),
-              onPressed: answerChosen,
+              onPressed: _answerChosen,
             ),
             RaisedButton(
               child: Text('Answer 2'),
