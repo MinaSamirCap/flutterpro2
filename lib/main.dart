@@ -10,6 +10,9 @@ void main() {
   //debugPaintBaselinesEnabled = true;
   //debugPaintPointersEnabled = true;
   runApp(MyApp()); // one line function only ...
+
+
+  //////////////// the new updated course start from lesson 2
 }
 
 class MyApp extends StatelessWidget {
