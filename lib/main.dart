@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_course_2/pages/home.dart';
 import 'package:flutter_course_2/product_manager.dart';
 import 'package:flutter_course_2/products.dart';
+import 'package:flutter_course_2/questions.dart';
 import 'package:flutter_course_2/tasks/task1.dart';
 
 void main() {
@@ -49,7 +50,7 @@ class _MyApp2State extends State<MyApp2> {
         ),
         body: Column(
           children: <Widget>[
-            Text(_questions.elementAt(_questionIndex)),
+            Question(_questions.elementAt(_questionIndex)),
             RaisedButton(
               child: Text('Answer 1'),
               onPressed: _answerChosen,
