@@ -14,8 +14,29 @@ void main() {
   //////////////// the new updated course start from lesson 2
 }
 
-class MyApp2 extends StatelessWidget {
+/** in stateful widget we split the responsibility into 2 classes because
+ * everytime the widget will be recreated 
+ * the state no need to recreated also to keep track of the state .. :) logically
+ */
+
+class MyApp2 extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyApp2State();
+  }
+}
+
+// this line State<MyApp2> says that this state belongs to MyApp2 Class
+class MyApp2State extends State<MyApp2> {
+  var questions = [
+    "What is your favorite color?",
+    "What is your favorite animal?"
+  ];
+  int questionIndex = 0;
   void answerChosen() {
+    setState(() {
+      questionIndex++;
+    });
     print("answer chosen");
   }
 
@@ -28,18 +49,18 @@ class MyApp2 extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Text("this is my quiestion"),
+            Text(questions.elementAt(questionIndex)),
             RaisedButton(
               child: Text('Answer 1'),
               onPressed: answerChosen,
             ),
-             RaisedButton(
+            RaisedButton(
               child: Text('Answer 2'),
               onPressed: () => print("Answer Chosen 2"),
             ),
-             RaisedButton(
+            RaisedButton(
               child: Text('Answer 3'),
-              onPressed: (){
+              onPressed: () {
                 print("Answer chosen 3");
               },
             )
