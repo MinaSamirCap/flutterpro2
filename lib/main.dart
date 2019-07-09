@@ -4,6 +4,8 @@ import 'package:flutter_course_2/pages/home.dart';
 import 'package:flutter_course_2/product_manager.dart';
 import 'package:flutter_course_2/products.dart';
 import 'package:flutter_course_2/tasks/task1.dart';
+import 'package:flutter_course_2/updatedcourse/quiz.dart';
+import 'package:flutter_course_2/updatedcourse/result.dart';
 
 import 'updatedcourse/answer.dart';
 import 'updatedcourse/question.dart';
@@ -63,14 +65,13 @@ class _MyApp2State extends State<MyApp2> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(_questions.elementAt(_questionIndex)['questionText']),
-            ...(_questions[_questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(title: answer, selectHandler: _answerChosen);
-            }).toList(),
-          ],
-        ),
+        body: (_questionIndex < _questions.length)
+            ? Quiz(
+                questions: _questions,
+                questionIndex: _questionIndex,
+                answerQuestion: _answerChosen,
+              )
+            : Result(),
       ),
     );
   }
