@@ -34,26 +34,40 @@ class MyApp2 extends StatefulWidget {
 // this line State<MyApp2> says that this state belongs to MyApp2 Class
 class _MyApp2State extends State<MyApp2> {
   int _questionIndex = 0;
+  int _totalScore = 0;
 
   /// List<Map<String, Object>>
   var _questions = [
     {
       'questionText': 'What is your favorite color?',
-      'answers': ['black', 'white', 'blue']
+      'answers': [
+        {'text': 'black', 'score': 10},
+        {'text': 'white', 'score': 6},
+        {'text': 'blue', 'score': 1},
+      ]
     },
     {
       'questionText': 'What is your favorite animal?',
-      'answers': ['dog', 'cat', 'duk']
+      'answers': [
+        {'text': 'dog', 'score': 10},
+        {'text': 'cat', 'score': 10},
+        {'text': 'duk', 'score': 10},
+      ]
     },
     {
       'questionText': 'What is your favorite instructor?',
-      'answers': ['max', 'paulo', 'nermu']
+      'answers': [
+        {'text': 'max', 'score': 8},
+        {'text': 'paulo', 'score': 9},
+        {'text': 'nermu', 'score': 10},
+      ]
     }
   ];
 
-  void _answerChosen() {
+  void _answerChosen(int score) {
     setState(() {
       _questionIndex++;
+      _totalScore += score;
     });
     print("answer chosen");
   }
@@ -71,7 +85,7 @@ class _MyApp2State extends State<MyApp2> {
                 questionIndex: _questionIndex,
                 answerQuestion: _answerChosen,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
@@ -96,5 +110,6 @@ class MyApp extends StatelessWidget {
 
   /// shift + alt + A --> multi line comment
   /// shift + alt + F --> format code
+  /// shift + alt + down arrow --> doublicate code
 
 }
