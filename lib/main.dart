@@ -8,13 +8,15 @@ import 'package:flutter_course_2/updatedcourse/quiz.dart';
 import 'package:flutter_course_2/updatedcourse/result.dart';
 
 import 'updatedcourse/answer.dart';
+import 'updatedcourse/app1_espenses/app3.dart';
 import 'updatedcourse/question.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
   //debugPaintBaselinesEnabled = true;
   //debugPaintPointersEnabled = true;
-  runApp(MyApp2()); // one line function only ...
+  //runApp(MyApp2()); // one line function only ...
+  runApp(MyApp3()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2
 }
