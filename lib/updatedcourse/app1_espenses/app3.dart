@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_course_2/updatedcourse/app1_espenses/transaction.dart';
+import 'package:flutter_course_2/updatedcourse/app1_espenses/models/transaction.dart';
 import 'package:intl/intl.dart';
 
 class MyApp3 extends StatelessWidget {
