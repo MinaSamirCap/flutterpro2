@@ -27,7 +27,18 @@ class MyApp3 extends StatelessWidget {
           ),
           Column(
             children: transactions.map((item) {
-              return Card(child: Text(item.title),);
+              return Card(
+                  child: Row(
+                children: <Widget>[
+                  Container(
+                    child: Text(item.amount.toString()),
+                  ),
+                  Column(children: <Widget>[
+                    Text(item.title),
+                    Text(item.date.toString())
+                  ],)
+                ],
+              ));
             }).toList(),
           )
         ],
