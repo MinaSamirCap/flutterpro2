@@ -31,12 +31,25 @@ class MyApp3 extends StatelessWidget {
                   child: Row(
                 children: <Widget>[
                   Container(
-                    child: Text(item.amount.toString()),
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.brown, width: 2)),
+                    child: Text(
+                      '\$ ${item.amount}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple),
+                    ),
+                    padding: EdgeInsets.all(10),
                   ),
-                  Column(children: <Widget>[
-                    Text(item.title),
-                    Text(item.date.toString())
-                  ],)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(item.title, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(item.date.toString())
+                    ],
+                  )
                 ],
               ));
             }).toList(),
