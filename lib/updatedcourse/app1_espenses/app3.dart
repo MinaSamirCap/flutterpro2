@@ -7,7 +7,9 @@ import 'widgets/transaction_list.dart';
 class MyApp3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePageApp3());
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.purple, accentColor: Colors.blue),
+      home: HomePageApp3());
   }
 }
 
@@ -42,8 +44,12 @@ class _HomePageApp3State extends State<HomePageApp3> {
     showModalBottomSheet(
         context: ctx,
         builder: (_) {
-          return NewTransaction(
-            addNewTransaction: _addNewTransaction,
+          return GestureDetector(
+            onTap: () {},
+            behavior: HitTestBehavior.opaque,
+            child: NewTransaction(
+              addNewTransaction: _addNewTransaction,
+            ),
           );
         });
   }
