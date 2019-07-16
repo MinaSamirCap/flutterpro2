@@ -12,17 +12,19 @@ class MyApp3 extends StatelessWidget {
       appBar: AppBar(
         title: Text('ExpensesApp'),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blueGrey,
-              child: Text('CHART'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blueGrey,
+                child: Text('CHART'),
+              ),
             ),
-          ),
-          UserTransations()
-        ],
+            UserTransations()
+          ],
+        ),
       ),
     ));
   }
