@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_course_2/pages/home.dart';
-import 'package:flutter_course_2/product_manager.dart';
-import 'package:flutter_course_2/products.dart';
-import 'package:flutter_course_2/tasks/task1.dart';
+
 import 'package:flutter_course_2/updatedcourse/quiz.dart';
 import 'package:flutter_course_2/updatedcourse/result.dart';
 
-import 'updatedcourse/answer.dart';
 import 'updatedcourse/app1_espenses/app3.dart';
-import 'updatedcourse/question.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -113,7 +108,7 @@ class MyApp extends StatelessWidget {
 
   // @override
   // Widget build(BuildContext context) {
-  //   // TODO: implement build
+  //   
   //   return null;
   // }
 
