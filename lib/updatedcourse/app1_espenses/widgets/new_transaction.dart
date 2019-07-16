@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
 
   NewTransaction({this.addNewTransaction});
 
-  void submitData() {
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
 
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void submitData() {
     final text = titleController.text;
     final amount = double.parse(amountController.text);
 
-    if(text.isEmpty || amount <=0){
+    if (text.isEmpty || amount <= 0) {
       return;
     }
 
-    addNewTransaction(text, amount);
+    widget.addNewTransaction(text, amount);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -30,7 +37,8 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              onSubmitted: (_) => submitData(), // because it is an anonemous function we must pass function --> submitData()
+              onSubmitted: (_) =>
+                  submitData(), // because it is an anonemous function we must pass function --> submitData()
               // onChanged: (value) {
               //   titleInput = value;
               // },
@@ -39,13 +47,15 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Amout'),
               controller: amountController,
               keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(), // because it is an anonemous function we must pass --> submitData()
+              onSubmitted: (_) =>
+                  submitData(), // because it is an anonemous function we must pass --> submitData()
               //onChanged: (value) => amountInput = value,
             ),
             FlatButton(
                 child: Text('Add Transaction'),
                 textColor: Colors.purple,
-                onPressed: submitData) // because it is not an anonemous function we directly pass refrences
+                onPressed:
+                    submitData) // because it is not an anonemous function we directly pass refrences
           ],
         ),
       ),

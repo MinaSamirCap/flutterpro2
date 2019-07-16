@@ -4,14 +4,19 @@ import 'models/transaction.dart';
 import 'widgets/new_transaction.dart';
 import 'widgets/transaction_list.dart';
 
-class MyApp3 extends StatefulWidget {
+class MyApp3 extends StatelessWidget {
   @override
-  _MyApp3State createState() => _MyApp3State();
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomePageApp3());
+  }
 }
 
-class _MyApp3State extends State<MyApp3> {
-  final List<Transaction> transactions = [];
+class HomePageApp3 extends StatefulWidget {
+  @override
+  _HomePageApp3State createState() => _HomePageApp3State();
+}
 
+class _HomePageApp3State extends State<HomePageApp3> {
   final List<Transaction> _userTransaction = [
     Transaction(
         id: 't1', title: 'new shose', amount: 69.99, date: DateTime.now()),
@@ -37,20 +42,15 @@ class _MyApp3State extends State<MyApp3> {
     showModalBottomSheet(
         context: ctx,
         builder: (_) {
-          return GestureDetector(
-            onTap: () {},
-            behavior: HitTestBehavior.opaque,
-            child: NewTransaction(
-              addNewTransaction: _addNewTransaction,
-            ),
+          return NewTransaction(
+            addNewTransaction: _addNewTransaction,
           );
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('ExpensesApp'),
         actions: <Widget>[
@@ -81,6 +81,6 @@ class _MyApp3State extends State<MyApp3> {
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
       ),
-    ));
+    );
   }
 }
