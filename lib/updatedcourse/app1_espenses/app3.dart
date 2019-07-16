@@ -5,9 +5,6 @@ import 'package:flutter_course_2/updatedcourse/app1_espenses/widgets/user_transa
 class MyApp3 extends StatelessWidget {
   final List<Transaction> transactions = [];
 
-  String titleInput;
-  String amountInput;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
