@@ -22,7 +22,7 @@ class TransactionList extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.brown, width: 2)),
                 child: Text(
-                  '\$ ${item.amount}',
+                  '\$ ${item.amount.toStringAsFixed(2)}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
