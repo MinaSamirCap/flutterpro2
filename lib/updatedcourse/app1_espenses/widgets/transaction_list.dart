@@ -12,45 +12,42 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 350,
       child: (userTransaction.length == 0)
-          ? Column(children: <Widget>[
-            Container(child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,), height: 200,),
-            SizedBox(height: 10,),
-            Text('NO TRASACTIONS ADDED YET!!')
-          ],)
+          ? Column(
+              children: <Widget>[
+                Container(
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                  height: 200,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('NO TRASACTIONS ADDED YET!!')
+              ],
+            )
           : ListView.builder(
               itemCount: userTransaction.length,
               itemBuilder: (ctx, index) {
                 final item = userTransaction[index];
                 return Card(
-                    child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      child: Text(
-                        '\$ ${item.amount.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).primaryColor),
-                      ),
-                      padding: EdgeInsets.all(10),
+                  elevation: 8,
+                  margin: EdgeInsets.all(6),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: FittedBox(child: Text('\$${item.amount}'))),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          item.title,
-                          style: Theme.of(context).textTheme.title,
-                        ),
-                        Text(DateFormat.yMMMMEEEEd().format(item.date))
-                      ],
-                    )
-                  ],
-                ));
+                    title: Text(
+                      item.title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(DateFormat.yMMMMd().format(item.date)),
+                  ),
+                );
               },
             ),
     );
