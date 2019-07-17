@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
@@ -10,20 +11,34 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime _selectedDate;
 
-  final amountController = TextEditingController();
+  void _submitData() {
+    final text = _titleController.text;
+    final amount = double.parse(_amountController.text);
 
-  void submitData() {
-    final text = titleController.text;
-    final amount = double.parse(amountController.text);
-
-    if (text.isEmpty || amount <= 0) {
+    if (text.isEmpty || amount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addNewTransaction(text, amount);
+    widget.addNewTransaction(text, amount, _selectedDate);
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2019),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -36,30 +51,37 @@ class _NewTransactionState extends State<NewTransaction> {
           children: <Widget>[
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
-              controller: titleController,
+              controller: _titleController,
               onSubmitted: (_) =>
-                  submitData(), // because it is an anonemous function we must pass function --> submitData()
+                  _submitData(), // because it is an anonemous function we must pass function --> submitData()
               // onChanged: (value) {
               //   titleInput = value;
               // },
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amout'),
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) =>
-                  submitData(), // because it is an anonemous function we must pass --> submitData()
+                  _submitData(), // because it is an anonemous function we must pass --> submitData()
               //onChanged: (value) => amountInput = value,
             ),
             Container(
               height: 70,
               child: Row(
                 children: <Widget>[
-                  Text('No Date Selected'),
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? 'No Date Selected'
+                        : DateFormat.yMd().format(_selectedDate)),
+                  ),
                   FlatButton(
-                    child: Text('Choose a date', style: TextStyle(fontWeight: FontWeight.bold),),
+                    child: Text(
+                      'Choose a date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     textColor: Theme.of(context).primaryColor,
-                    onPressed: () {},
+                    onPressed: _presentDatePicker,
                   )
                 ],
               ),
@@ -69,7 +91,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).textTheme.button.color,
                 onPressed:
-                    submitData) // because it is not an anonemous function we directly pass refrences
+                    _submitData) // because it is not an anonemous function we directly pass refrences
           ],
         ),
       ),
