@@ -51,9 +51,23 @@ class _NewTransactionState extends State<NewTransaction> {
                   submitData(), // because it is an anonemous function we must pass --> submitData()
               //onChanged: (value) => amountInput = value,
             ),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Text('No Date Selected'),
+                  FlatButton(
+                    child: Text('Choose a date', style: TextStyle(fontWeight: FontWeight.bold),),
+                    textColor: Theme.of(context).primaryColor,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
                 child: Text('Add Transaction'),
-                textColor: Colors.purple,
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
                 onPressed:
                     submitData) // because it is not an anonemous function we directly pass refrences
           ],
