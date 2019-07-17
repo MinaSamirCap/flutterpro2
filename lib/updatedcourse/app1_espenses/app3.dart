@@ -55,6 +55,13 @@ class _HomePageApp3State extends State<HomePageApp3> {
     });
   }
 
+  void _deleteTransaction(int index) {
+    setState(() {
+      _userTransaction.removeAt(index);
+      //_userTransaction.removeWhere(test)
+    });
+  }
+
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -89,6 +96,7 @@ class _HomePageApp3State extends State<HomePageApp3> {
             Chart(_recentTransaction),
             TransactionList(
               userTransaction: _userTransaction,
+              deleteTransaction: _deleteTransaction
             )
           ],
         ),

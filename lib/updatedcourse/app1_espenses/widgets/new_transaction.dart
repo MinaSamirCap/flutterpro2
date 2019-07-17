@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
+  
 
   NewTransaction({this.addNewTransaction});
 
