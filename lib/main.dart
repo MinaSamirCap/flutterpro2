@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_course_2/pages/home.dart';
 
 import 'package:flutter_course_2/updatedcourse/quiz.dart';
@@ -11,6 +12,9 @@ void main() {
   //debugPaintBaselinesEnabled = true;
   //debugPaintPointersEnabled = true;
   //runApp(MyApp2()); // one line function only ...
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
   runApp(MyApp3()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2
@@ -108,7 +112,7 @@ class MyApp extends StatelessWidget {
 
   // @override
   // Widget build(BuildContext context) {
-  //   
+  //
   //   return null;
   // }
 
