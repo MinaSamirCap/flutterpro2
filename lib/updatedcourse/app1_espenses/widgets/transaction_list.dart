@@ -11,22 +11,25 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
       child: (userTransaction.length == 0)
-          ? Column(
-              children: <Widget>[
-                Container(
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                  height: 200,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('NO TRASACTIONS ADDED YET!!')
-              ],
+          ? LayoutBuilder(
+              builder: (_, constraints) {
+                return Column(
+                  children: <Widget>[
+                    Container(
+                      height: constraints.maxHeight * 0.6,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('NO TRASACTIONS ADDED YET!!')
+                  ],
+                );
+              },
             )
           : ListView.builder(
               itemCount: userTransaction.length,

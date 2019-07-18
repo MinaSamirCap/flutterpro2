@@ -47,7 +47,9 @@ class ChartBar extends StatelessWidget {
             SizedBox(
               height: widgetHeight * 0.05,
             ),
-            Container(height: widgetHeight * 0.15, child: Text(label))
+            Container(
+                height: widgetHeight * 0.15,
+                child: FittedBox(child: Text(label)))
           ],
         );
       },

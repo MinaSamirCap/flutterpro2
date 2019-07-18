@@ -13,8 +13,9 @@ void main() {
   //debugPaintPointersEnabled = true;
   //runApp(MyApp2()); // one line function only ...
 
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
+  /// to prevent app from rotation ...
+  /*SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);*/
   runApp(MyApp3()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2

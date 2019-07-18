@@ -35,6 +35,7 @@ class HomePageApp3 extends StatefulWidget {
 }
 
 class _HomePageApp3State extends State<HomePageApp3> {
+  bool _showChart = false;
   final List<Transaction> _userTransaction = [];
 
   List<Transaction> get _recentTransaction {
@@ -78,6 +79,8 @@ class _HomePageApp3State extends State<HomePageApp3> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     var appBar = AppBar(
       title: Text(
         'Expenses App',
@@ -94,23 +97,48 @@ class _HomePageApp3State extends State<HomePageApp3> {
             appBar.preferredSize.height -
             MediaQuery.of(context).padding.top) *
         0.7;
-    final chartHeight = (MediaQuery.of(context).size.height -
-            appBar.preferredSize.height -
-            MediaQuery.of(context).padding.top) *
-        0.3;
+    double chartHeight(double high) {
+      return (MediaQuery.of(context).size.height -
+              appBar.preferredSize.height -
+              MediaQuery.of(context).padding.top) *
+          high;
+    }
+
+    final txListWidget = Container(
+      height: listHeight,
+      child: TransactionList(
+          userTransaction: _userTransaction,
+          deleteTransaction: _deleteTransaction),
+    );
+
+    Widget chartWidget(double heigh) {
+      return Container(
+          height: chartHeight(heigh), child: Chart(_recentTransaction));
+    }
 
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(height: chartHeight, child: Chart(_recentTransaction)),
-            Container(
-              height: listHeight,
-              child: TransactionList(
-                  userTransaction: _userTransaction,
-                  deleteTransaction: _deleteTransaction),
-            )
+            if (isLandScape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Show Chart'),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    },
+                  )
+                ],
+              ),
+            if (isLandScape)
+              _showChart ? chartWidget(0.7) : txListWidget
+            else ...[chartWidget(0.3), txListWidget],
           ],
         ),
       ),
