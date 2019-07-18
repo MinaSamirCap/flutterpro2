@@ -57,8 +57,8 @@ class _HomePageApp3State extends State<HomePageApp3> {
 
   void _deleteTransaction(int index) {
     setState(() {
-      _userTransaction.removeAt(index);
-      //_userTransaction.removeWhere(test)
+      //_userTransaction.removeAt(index);
+      _userTransaction.removeWhere((item) => item.id == index);
     });
   }
 
@@ -78,25 +78,38 @@ class _HomePageApp3State extends State<HomePageApp3> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Expenses App',
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(this.context),
-          )
-        ],
+    var appBar = AppBar(
+      title: Text(
+        'Expenses App',
       ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(this.context),
+        )
+      ],
+    );
+
+    final listHeight = (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+        0.6;
+    final chartHeight = (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+        0.4;
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Chart(_recentTransaction),
-            TransactionList(
-              userTransaction: _userTransaction,
-              deleteTransaction: _deleteTransaction
+            Container(height: chartHeight, child: Chart(_recentTransaction)),
+            Container(
+              height: listHeight,
+              child: TransactionList(
+                  userTransaction: _userTransaction,
+                  deleteTransaction: _deleteTransaction),
             )
           ],
         ),
