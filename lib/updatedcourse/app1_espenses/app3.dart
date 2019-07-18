@@ -93,11 +93,11 @@ class _HomePageApp3State extends State<HomePageApp3> {
     final listHeight = (MediaQuery.of(context).size.height -
             appBar.preferredSize.height -
             MediaQuery.of(context).padding.top) *
-        0.6;
+        0.7;
     final chartHeight = (MediaQuery.of(context).size.height -
             appBar.preferredSize.height -
             MediaQuery.of(context).padding.top) *
-        0.4;
+        0.3;
 
     return Scaffold(
       appBar: appBar,
