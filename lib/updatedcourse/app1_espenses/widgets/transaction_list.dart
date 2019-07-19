@@ -26,7 +26,7 @@ class TransactionList extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text('NO TRASACTIONS ADDED YET!!')
+                    Text('NO TRASACTIONS ADDED YET!!', style: Theme.of(context).textTheme.title,)
                   ],
                 );
               },
