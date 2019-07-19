@@ -134,7 +134,8 @@ class _HomePageApp3State extends State<HomePageApp3> {
           deleteTransaction: _deleteTransaction),
     );
 
-    final pageBody = SingleChildScrollView(
+    final pageBody = SafeArea(
+        child: SingleChildScrollView(
       child: Column(
         children: <Widget>[
           if (isLandScape)
@@ -158,7 +159,7 @@ class _HomePageApp3State extends State<HomePageApp3> {
           else ...[chartWidget(0.3), txListWidget],
         ],
       ),
-    );
+    ));
 
     return Platform.isIOS
         ? CupertinoPageScaffold(
