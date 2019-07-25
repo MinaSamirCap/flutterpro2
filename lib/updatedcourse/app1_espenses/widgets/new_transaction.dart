@@ -20,10 +20,16 @@ class NewTransaction extends StatefulWidget {
   }
 }
 
-class _NewTransactionState extends State<NewTransaction> {
+class _NewTransactionState extends State<NewTransaction> with WidgetsBindingObserver{
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate;
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+      print("LIFECYCLE ===== $state");
+  }
 
   _NewTransactionState(){
     printInDebut("Constructor Create State --> NewTransaction");
@@ -32,6 +38,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   void initState() {
     printInDebut("Init State --> NewTransaction");
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
@@ -46,6 +53,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   void dispose() {
     printInDebut("Dispose --> NewTransaction");
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
