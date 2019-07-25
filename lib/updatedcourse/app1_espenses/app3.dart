@@ -84,32 +84,8 @@ class _HomePageApp3State extends State<HomePageApp3> {
     final isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
-    final PreferredSizeWidget appBar = Platform.isIOS
-        ? CupertinoNavigationBar(
-            middle: Text(
-              'Expenses App',
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                GestureDetector(
-                  child: Icon(CupertinoIcons.add),
-                  onTap: () => _startAddNewTransaction(this.context),
-                )
-              ],
-            ),
-          )
-        : AppBar(
-            title: Text(
-              'Expenses App',
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () => _startAddNewTransaction(this.context),
-              )
-            ],
-          );
+    final PreferredSizeWidget appBar =
+        getAppBar(context, _startAddNewTransaction);
 
     final listHeight = (MediaQuery.of(context).size.height -
             appBar.preferredSize.height -
@@ -142,7 +118,10 @@ class _HomePageApp3State extends State<HomePageApp3> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Show Chart', style: Theme.of(context).textTheme.title,),
+                Text(
+                  'Show Chart',
+                  style: Theme.of(context).textTheme.title,
+                ),
                 Switch.adaptive(
                   activeColor: Theme.of(context).accentColor,
                   value: _showChart,
@@ -179,4 +158,34 @@ class _HomePageApp3State extends State<HomePageApp3> {
                   ),
           );
   }
+}
+
+PreferredSizeWidget getAppBar(
+    BuildContext context, Function _startAddNewTransaction) {
+  return Platform.isIOS
+      ? CupertinoNavigationBar(
+          middle: Text(
+            'Expenses App',
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              GestureDetector(
+                child: Icon(CupertinoIcons.add),
+                onTap: () => _startAddNewTransaction(context),
+              )
+            ],
+          ),
+        )
+      : AppBar(
+          title: Text(
+            'Expenses App',
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context),
+            )
+          ],
+        );
 }
