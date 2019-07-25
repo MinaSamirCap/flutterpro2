@@ -120,5 +120,6 @@ class MyApp extends StatelessWidget {
   /// shift + alt + A --> multi line comment
   /// shift + alt + F --> format code
   /// shift + alt + down arrow --> doublicate code
+  /// ctrl + shift + p --> open devtools
 
 }
