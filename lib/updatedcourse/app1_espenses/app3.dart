@@ -36,9 +36,32 @@ class HomePageApp3 extends StatefulWidget {
   _HomePageApp3State createState() => _HomePageApp3State();
 }
 
-class _HomePageApp3State extends State<HomePageApp3> {
+class _HomePageApp3State extends State<HomePageApp3>
+    with WidgetsBindingObserver {
   bool _showChart = false;
   final List<Transaction> _userTransaction = [];
+
+  ////////////// app lifecycle ....
+  ///
+  ///
+  ///
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+      print("LIFECYCLE $state");
+  }
+
+  @override
+  void dispose(){
+    WidgetsBinding.instance.removeObserver(this);
+      super.dispose();
+  }
 
   List<Transaction> get _recentTransaction {
     return _userTransaction.where((tx) {
