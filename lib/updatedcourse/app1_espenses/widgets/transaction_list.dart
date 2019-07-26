@@ -1,17 +1,36 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2/updatedcourse/app1_espenses/models/transaction.dart';
 import 'package:intl/intl.dart';
 
-class TransactionList extends StatelessWidget {
+class TransactionList extends StatefulWidget {
   final List<Transaction> userTransaction;
   final Function deleteTransaction;
 
   TransactionList({this.userTransaction, this.deleteTransaction});
 
   @override
+  _TransactionListState createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
+  Color _bgColor;
+  final colors = const [Colors.black, Colors.blue, Colors.red, Colors.yellow];
+
+  @override
+  void initState() {
+    
+    final index = Random().nextInt(4);
+    print("<=======================INDEX=====================>: $index");
+    _bgColor = colors[Random().nextInt(4)];
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      child: (userTransaction.length == 0)
+      child: (widget.userTransaction.length == 0)
           ? LayoutBuilder(
               builder: (_, constraints) {
                 return Column(
@@ -26,20 +45,24 @@ class TransactionList extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text('NO TRASACTIONS ADDED YET!!', style: Theme.of(context).textTheme.title,)
+                    Text(
+                      'NO TRASACTIONS ADDED YET!!',
+                      style: Theme.of(context).textTheme.title,
+                    )
                   ],
                 );
               },
             )
           : ListView.builder(
-              itemCount: userTransaction.length,
+              itemCount: widget.userTransaction.length,
               itemBuilder: (ctx, index) {
-                final item = userTransaction[index];
+                final item = widget.userTransaction[index];
                 return Card(
                   elevation: 8,
                   margin: EdgeInsets.all(6),
                   child: ListTile(
                     leading: CircleAvatar(
+                      backgroundColor: colors[Random().nextInt(4)],
                       radius: 30,
                       child: Padding(
                           padding: EdgeInsets.all(6),
@@ -55,12 +78,12 @@ class TransactionList extends StatelessWidget {
                             icon: Icon(Icons.delete),
                             textColor: Theme.of(context).errorColor,
                             label: Text('Delete'),
-                            onPressed: () => deleteTransaction(index),
+                            onPressed: () => widget.deleteTransaction(index),
                           )
                         : IconButton(
                             icon: Icon(Icons.delete),
                             color: Theme.of(context).errorColor,
-                            onPressed: () => deleteTransaction(index),
+                            onPressed: () => widget.deleteTransaction(index),
                           ),
                   ),
                 );
