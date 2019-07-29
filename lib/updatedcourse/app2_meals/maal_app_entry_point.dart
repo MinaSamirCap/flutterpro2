@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/categories_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/category_meal_screen.dart';
+import 'package:flutter_course_2/updatedcourse/app2_meals/screens/meal_details_screen.dart';
 
 class MealApp extends StatelessWidget {
   @override
@@ -23,6 +24,7 @@ class MealApp extends StatelessWidget {
       routes: {
         '/': (ctx) => CategoriesScreen(),
         CategoryMealScreen.ROUTE_NAME: (ctx) => CategoryMealScreen(),
+        MealDetailsScreen.ROUTE_NAME: (ctx) => MealDetailsScreen(),
       },
     );
   }
