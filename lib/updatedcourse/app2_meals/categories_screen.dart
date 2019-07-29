@@ -9,13 +9,14 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'DeliMeal :)',
-          style: TextStyle(fontFamily: 'Segoe-Script', fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontFamily: 'Segoe-Script', fontWeight: FontWeight.bold),
         ),
       ),
       body: GridView(
         padding: const EdgeInsets.all(25),
         children: DUMMY_CATEGORIES.map((item) {
-          return CategoryItem(item.title, item.color);
+          return CategoryItem(item.id, item.title, item.color);
         }).toList(),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
