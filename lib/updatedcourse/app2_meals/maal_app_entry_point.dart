@@ -18,9 +18,11 @@ class MealApp extends StatelessWidget {
                   fontSize: 20,
                   fontFamily: 'RobotoCondensed',
                   fontWeight: FontWeight.bold))),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
+      //initialRoute: '/',
       routes: {
-        '/cagegory-meals': (ctx) => CategoryMealScreen(),
+        '/': (ctx) => CategoriesScreen(),
+        CategoryMealScreen.ROUTE_NAME: (ctx) => CategoryMealScreen(),
       },
     );
   }

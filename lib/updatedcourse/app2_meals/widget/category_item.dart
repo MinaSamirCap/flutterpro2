@@ -13,8 +13,8 @@ class CategoryItem extends StatelessWidget {
       return CategoryMealScreen(id, title);
     })); */
 
-    Navigator.of(ctx)
-        .pushNamed('/cagegory-meals', arguments: {'id': id, 'title': title});
+    Navigator.of(ctx).pushNamed(CategoryMealScreen.ROUTE_NAME,
+        arguments: {'id': id, 'title': title});
   }
 
   @override
