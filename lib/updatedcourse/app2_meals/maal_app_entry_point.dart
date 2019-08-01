@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/categories_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/category_meal_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/meal_details_screen.dart';
+import 'package:flutter_course_2/updatedcourse/app2_meals/screens/tabs_screen.dart';
 
 class MealApp extends StatelessWidget {
   @override
@@ -22,11 +23,11 @@ class MealApp extends StatelessWidget {
       // home: CategoriesScreen(),
       //initialRoute: '/',
       routes: {
-        '/': (ctx) => CategoriesScreen(),
+        '/': (ctx) => TabsScreen(),
         CategoryMealScreen.ROUTE_NAME: (ctx) => CategoryMealScreen(),
         MealDetailsScreen.ROUTE_NAME: (ctx) => MealDetailsScreen(),
       },
-     /*  onGenerateRoute: (setting) {
+      /*  onGenerateRoute: (setting) {
         return MaterialPageRoute(
             builder: (ctx) => Center(
                   child: Text('OnGenerateRoute'),
