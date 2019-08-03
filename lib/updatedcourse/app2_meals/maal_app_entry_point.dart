@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/categories_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/category_meal_screen.dart';
+import 'package:flutter_course_2/updatedcourse/app2_meals/screens/fliter_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/meal_details_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/tabs_screen.dart';
 
@@ -26,6 +27,7 @@ class MealApp extends StatelessWidget {
         '/': (ctx) => TabsScreen(),
         CategoryMealScreen.ROUTE_NAME: (ctx) => CategoryMealScreen(),
         MealDetailsScreen.ROUTE_NAME: (ctx) => MealDetailsScreen(),
+        FilterScreen.ROUTE_NAME: (ctx) => FilterScreen(),
       },
       /*  onGenerateRoute: (setting) {
         return MaterialPageRoute(
