@@ -4,12 +4,18 @@ import 'package:flutter_course_2/updatedcourse/app2_meals/screens/meal_details_s
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+  final Function removeItem;
 
-  MealItem(this.meal);
+  MealItem(this.meal, this.removeItem);
 
   void selectMeal(BuildContext ctx) {
     Navigator.of(ctx)
-        .pushNamed(MealDetailsScreen.ROUTE_NAME, arguments: meal.id);
+        .pushNamed(MealDetailsScreen.ROUTE_NAME, arguments: meal.id)
+        .then((result) {
+      if (result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   String get complexityText {
