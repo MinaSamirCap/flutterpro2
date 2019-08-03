@@ -1,11 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2/updatedcourse/app2_meals/dummy_data.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/categories_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/category_meal_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/fliter_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/meal_details_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app2_meals/screens/tabs_screen.dart';
 
-class MealApp extends StatelessWidget {
+import 'models/meal.dart';
+
+class MealApp extends StatefulWidget {
+  @override
+  _MealAppState createState() => _MealAppState();
+}
+
+class _MealAppState extends State<MealApp> {
+  Map<String, bool> _filters = {
+    'gluten': false,
+    'lactose': false,
+    'vagan': false,
+    'vegetarien': false
+  };
+
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _setFilters(Map<String, bool> filtersData) {
+    setState(() {
+      _filters = filtersData;
+
+      _availableMeals = DUMMY_MEALS.where((item) {
+        // ....
+        if (_filters['gluten'] && !item.isGlutenFree) {
+          return false;
+        }
+        if (_filters['lactose'] && !item.isLactoseFree) {
+          return false;
+        }
+        if (_filters['vagan'] && !item.isVegan) {
+          return false;
+        }
+        if (_filters['vegetarien'] && !item.isVegetarian) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,9 +65,10 @@ class MealApp extends StatelessWidget {
       //initialRoute: '/',
       routes: {
         '/': (ctx) => TabsScreen(),
-        CategoryMealScreen.ROUTE_NAME: (ctx) => CategoryMealScreen(),
+        CategoryMealScreen.ROUTE_NAME: (ctx) =>
+            CategoryMealScreen(_availableMeals),
         MealDetailsScreen.ROUTE_NAME: (ctx) => MealDetailsScreen(),
-        FilterScreen.ROUTE_NAME: (ctx) => FilterScreen(),
+        FilterScreen.ROUTE_NAME: (ctx) => FilterScreen(_filters, _setFilters),
       },
       /*  onGenerateRoute: (setting) {
         return MaterialPageRoute(

@@ -4,6 +4,11 @@ import 'package:flutter_course_2/updatedcourse/app2_meals/widget/main_drawer.dar
 class FilterScreen extends StatefulWidget {
   static const ROUTE_NAME = '/filters';
 
+  Function saveFilters;
+  final Map<String, bool> filters;
+
+  FilterScreen(this.filters, this.saveFilters);
+
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
@@ -13,6 +18,15 @@ class _FilterScreenState extends State<FilterScreen> {
   var _vegetarian = false;
   var _vegan = false;
   var _lactoseFree = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFree = widget.filters['gluten'];
+    _vegetarian = widget.filters['vegetarien'];
+    _vegan = widget.filters['vagan'];
+    _lactoseFree = widget.filters['lactose'];
+  }
 
   Widget _buildSwitchTile(
       String title, String desc, bool currentVal, Function handler) {
@@ -28,6 +42,19 @@ class _FilterScreenState extends State<FilterScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Your Filters'),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.save),
+                onPressed: () {
+                  final selectFilters = {
+                    'gluten': _glutenFree,
+                    'lactose': _lactoseFree,
+                    'vagan': _vegan,
+                    'vegetarien': _vegetarian
+                  };
+                  widget.saveFilters(selectFilters);
+                }),
+          ],
         ),
         drawer: MainDrawer(),
         body: Column(
@@ -58,18 +85,14 @@ class _FilterScreenState extends State<FilterScreen> {
                       _lactoseFree = newValue;
                     });
                   }),
-                  _buildSwitchTile(
-                      'Vegeterian',
-                      'Only include Vegeterian meals',
-                      _vegetarian, (newValue) {
+                  _buildSwitchTile('Vegeterian',
+                      'Only include Vegeterian meals', _vegetarian, (newValue) {
                     setState(() {
                       _vegetarian = newValue;
                     });
                   }),
-                  _buildSwitchTile(
-                      'Vegan',
-                      'Only include Vegan meals',
-                      _vegan, (newValue) {
+                  _buildSwitchTile('VeganVeganVegan',
+                      'Only include Vegan mealsmealsmeals', _vegan, (newValue) {
                     setState(() {
                       _vegan = newValue;
                     });
