@@ -7,6 +7,7 @@ import 'package:flutter_course_2/updatedcourse/result.dart';
 
 import 'updatedcourse/app1_espenses/app3.dart';
 import 'updatedcourse/app2_meals/maal_app_entry_point.dart';
+import 'updatedcourse/app3_shop/shop_app_entry_point.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -18,7 +19,8 @@ void main() {
   /*SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);*/
   //runApp(MyApp3()); // one line function only ...
-  runApp(MealApp()); // one line function only ...
+  //runApp(MealApp()); // one line function only ...
+  runApp(ShopApp()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2
 }
