@@ -6,7 +6,9 @@ import 'package:flutter_course_2/updatedcourse/app3_shop/screens/product_details
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Product product = Provider.of<Product>(context);
+    Product product = Provider.of<Product>(context, listen: false);
+
+    print('ProductItem: buildbuildbuild');
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -26,13 +28,16 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            color: Theme.of(context).accentColor,
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            onPressed: () {
-              product.toggleFavoriteState();
-            },
+          leading: Consumer<Product>(
+            builder: (ctxt, changedProduct, _) => IconButton(
+              color: Theme.of(context).accentColor,
+              icon: Icon(changedProduct.isFavorite
+                  ? Icons.favorite
+                  : Icons.favorite_border),
+              onPressed: () {
+                product.toggleFavoriteState();
+              },
+            ),
           ),
           title: Text(
             product.title,
