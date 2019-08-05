@@ -26,6 +26,6 @@ class ShopApp extends StatelessWidget {
           ProductDetailsScreen.ROUTE_NAME: (ctx) => ProductDetailsScreen(),
         },
       ),
-    ));
+    );
   }
 }

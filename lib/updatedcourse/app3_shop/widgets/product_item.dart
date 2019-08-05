@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/models/product.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/product_details_screen.dart';
@@ -7,6 +8,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Product product = Provider.of<Product>(context, listen: false);
+    Cart cart = Provider.of<Cart>(context, listen: false);
 
     print('ProductItem: buildbuildbuild');
 
@@ -46,7 +48,9 @@ class ProductItem extends StatelessWidget {
           trailing: IconButton(
             color: Theme.of(context).accentColor,
             icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              cart.addItem(product.id, product.price, product.title);
+            },
           ),
         ),
       ),
