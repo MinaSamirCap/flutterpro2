@@ -19,8 +19,14 @@ class ProductGrid extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10),
       itemBuilder: (ctx, index) {
-        return ChangeNotifierProvider(
-          builder: (ctxt) => productsProvider.items[index],
+        /// we use ChangeNotifierProvider.value() with value attribute
+        /// instead of ChangeNotifierProvider() with builder attribute
+        /// .value approche is working perfectrly with the list rather than builder style. 
+        /// because flutter will recycle the items so we may find mismatch with the data if we used the builder style
+        /// so we recommend to use .value with any type of list or grid
+        return ChangeNotifierProvider.value(
+          value: productsProvider.items[index],
+          //builder: (ctxt) => productsProvider.items[index], -->
           child: ProductItem(),
         );
       },
