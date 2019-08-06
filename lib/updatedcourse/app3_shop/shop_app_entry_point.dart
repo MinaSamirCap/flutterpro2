@@ -8,13 +8,17 @@ import 'package:flutter_course_2/updatedcourse/app3_shop/screens/products_overvi
 class ShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(
-      builder: (ctx) => ProductsProvider(),),
-      ChangeNotifierProvider.value(
-        value: Cart(),
-      )],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          builder: (ctx) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Cart(),
+        )
+      ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'My Shop',
         theme: ThemeData(
             primarySwatch: Colors.purple,

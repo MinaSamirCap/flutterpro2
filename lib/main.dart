@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_course_2/pages/home.dart';
 
@@ -10,6 +11,7 @@ import 'updatedcourse/app2_meals/maal_app_entry_point.dart';
 import 'updatedcourse/app3_shop/shop_app_entry_point.dart';
 
 void main() {
+  debugPrintEndFrameBanner = false;
   //debugPaintSizeEnabled = true;
   //debugPaintBaselinesEnabled = true;
   //debugPaintPointersEnabled = true;
