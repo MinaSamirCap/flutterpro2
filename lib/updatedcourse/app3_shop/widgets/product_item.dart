@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/models/product.dart';
@@ -56,6 +57,8 @@ class ProductItem extends StatelessWidget {
               /// like the problem I face to show the button sheet also in drawer ...
               /// so we will find methods leke showSnackBar for buttonSheet and drawer
               /// Scaffold.of(context).showBottomSheet() Scaffold.of(context).openDrawer()
+
+              Scaffold.of(context).hideCurrentSnackBar();
               Scaffold.of(context).showSnackBar(SnackBar(
                 content: Text('Added item to cart'),
                 duration: Duration(seconds: 2),
