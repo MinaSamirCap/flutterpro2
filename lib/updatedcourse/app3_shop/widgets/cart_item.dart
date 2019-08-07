@@ -29,6 +29,37 @@ class CartItem extends StatelessWidget {
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
+      confirmDismiss: (direction) {
+        /// NOTE:
+        /// confirmDismiss neets a Future<bool> return to it
+        /// so we need the showDialog to return the same thing
+        /// the showDialog returns Future<T> --> but it is generic
+        /// the futur of the showDialog will be called after the dialog is closed.
+        /// Also showDialog() Returns a [Future] that resolves to the value (if any)
+        /// that was passed to [Navigator.pop] when the dialog was closed.
+        /// so in the pop we just need to pass true or false ..
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text('Are You Sure?!!'),
+                  content:
+                      Text('Are you want to remove the item from the cart??'),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text('NO'),
+                      onPressed: () {
+                        Navigator.of(ctx).pop(false);
+                      },
+                    ),
+                    FlatButton(
+                      child: Text('YES'),
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                      },
+                    ),
+                  ],
+                ));
+      },
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
