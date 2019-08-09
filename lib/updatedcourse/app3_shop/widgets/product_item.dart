@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/models/product.dart';
