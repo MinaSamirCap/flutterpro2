@@ -3,6 +3,7 @@ import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/order_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/products_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/cart_screen.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/screens/edit_product_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/order_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/user_product_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,7 @@ class ShopApp extends StatelessWidget {
           CartScreen.ROUTE_NAME: (ctx) => CartScreen(),
           OrderScreen.ROUTE_NAME: (ctx) => OrderScreen(),
           UserProductScreen.ROUTE_NAME: (ctx) => UserProductScreen(),
+          EditProductScreen.ROUTE_NAME: (ctx) => EditProductScreen(),
         },
       ),
     );
