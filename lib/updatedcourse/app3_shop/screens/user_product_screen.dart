@@ -3,6 +3,7 @@ import 'package:flutter_course_2/updatedcourse/app3_shop/widgets/app_drawer.dart
 import 'package:flutter_course_2/updatedcourse/app3_shop/widgets/user_product_item.dart';
 import 'package:provider/provider.dart';
 import '../providers/products_provider.dart';
+import 'edit_product_screen.dart';
 
 class UserProductScreen extends StatelessWidget {
   static const ROUTE_NAME = '/user-products';
@@ -19,7 +20,9 @@ class UserProductScreen extends StatelessWidget {
             icon: Icon(
               Icons.add,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(EditProductScreen.ROUTE_NAME);
+            },
           )
         ],
       ),
@@ -29,7 +32,9 @@ class UserProductScreen extends StatelessWidget {
           itemCount: productsProvider.items.length,
           itemBuilder: (_, index) => Column(
             children: <Widget>[
-              UserProductItem(productsProvider.items[index].title,
+              UserProductItem(
+                  productsProvider.items[index].id,
+                  productsProvider.items[index].title,
                   productsProvider.items[index].imageUrl),
               Divider()
             ],
