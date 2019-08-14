@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/providers/products_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/cart_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,36 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   var _showOnlyFavorites = false;
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    /// Provider.of<ProductsProvider>(context).fetchAndSetProducts(); WILL NOT WORK --> becasue
+    /// the context still not ready to use
+    /// Alternative way ...
+    /// we can use futer with zero delay because future will execute after fully initialized .. :)
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<ProductsProvider>(context).fetchAndSetProducts();
+    // });
+    /// that is work around .. another approach we will use didChangedDependency(); with a flag
+    /// because this method is running more than one time ...
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      _isLoading = true;
+      Provider.of<ProductsProvider>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +95,11 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           ),
         ],
       ),
-      body: new ProductGrid(_showOnlyFavorites),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductGrid(_showOnlyFavorites),
     );
   }
 }

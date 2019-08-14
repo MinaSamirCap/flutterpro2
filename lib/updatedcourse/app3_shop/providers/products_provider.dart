@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http; // to avoid crashing with names ..
 import '../dummy_data.dart';
 
 class ProductsProvider with ChangeNotifier {
-  List<Product> _items = dummyProducts;
+  List<Product> _items; // = dummyProducts;
 
   //var _showFavoritesOnly = false;
 
@@ -40,8 +40,31 @@ class ProductsProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
+  Future<void> fetchAndSetProducts() async {
+    const url = 'https://fluttersetup-88480.firebaseio.com/product.json';
+
+    try {
+      final response = await http.get(url);
+      final List<Product> loadedProduct = [];
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      extractedData.forEach((prodId, prodData) {
+        loadedProduct.add(Product(
+            id: prodId,
+            title: prodData['title'],
+            description: prodData['description'],
+            imageUrl: prodData['imageUrl'],
+            price: prodData['price'],
+            isFavorite: prodData['isFavorite']));
+      });
+      _items = loadedProduct;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   Future<void> addProduct(Product newProduct) async {
-    const url = 'https://fluttersetup-88480.firebaseio.com/product';
+    const url = 'https://fluttersetup-88480.firebaseio.com/product.json';
 
     /// the post method will return a future so if I want to execute something after the api calling
     /// I need to add that in the .then() method ...
@@ -65,7 +88,6 @@ class ProductsProvider with ChangeNotifier {
           imageUrl: newProduct.imageUrl);
       _items.add(product);
       notifyListeners();
-
     } catch (error) {
       print(error);
       throw error;
