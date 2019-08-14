@@ -40,23 +40,23 @@ class ProductsProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> addProduct(Product newProduct) {
-    const url = 'https://fluttersetup-88480.firebaseio.com/product.json';
+  Future<void> addProduct(Product newProduct) async {
+    const url = 'https://fluttersetup-88480.firebaseio.com/product';
 
     /// the post method will return a future so if I want to execute something after the api calling
     /// I need to add that in the .then() method ...
     /// also if I add something aftet the post method it will executed immediately because I did not
     /// add await and async in the function to wait for server response ....
-    return http
-        .post(url,
-            body: json.encode({
-              'title': newProduct.title,
-              'description': newProduct.description,
-              'imageUrl': newProduct.imageUrl,
-              'price': newProduct.price,
-              'isFavorite': newProduct.isFavorite
-            }))
-        .then((response) {
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+            'isFavorite': newProduct.isFavorite
+          }));
+
       final product = Product(
           id: json.decode(response.body)['name'],
           title: newProduct.title,
@@ -65,10 +65,11 @@ class ProductsProvider with ChangeNotifier {
           imageUrl: newProduct.imageUrl);
       _items.add(product);
       notifyListeners();
-    }).catchError((error){
+
+    } catch (error) {
       print(error);
       throw error;
-    });
+    }
   }
 
   void updateProduct(Product product) {
