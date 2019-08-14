@@ -1,4 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/models/http_exception.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Product with ChangeNotifier {
   final String id;
@@ -17,8 +20,32 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  void toggleFavoriteState() {
+  void _setFavValue(bool newVal) {
+    isFavorite = newVal;
+    notifyListeners();
+  }
+
+  void toggleFavoriteState() async {
+    final oldState = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
+
+    /// FYI --> http only throw exceptions with get and post
+    /// not with delete and patch so .. in requests with delete and patch
+    /// you have to extract the response status code by your self ...
+    /// as the following
+
+    final url = 'https://fluttersetup-88480.firebaseio.com/product/$id.json';
+    try {
+      final response = await http.patch(url,
+          body: json.encode({
+            'isFavorite': isFavorite,
+          }));
+      if (response.statusCode >= 400) {
+        throw HttpException('Can not mark as facorite now .. !!');
+      }
+    } catch (error) {
+      _setFavValue(oldState);
+    }
   }
 }
