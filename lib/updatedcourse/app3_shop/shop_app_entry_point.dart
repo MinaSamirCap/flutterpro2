@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/order_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/products_provider.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/screens/auth-screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/cart_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/edit_product_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/order_screen.dart';
@@ -32,7 +33,7 @@ class ShopApp extends StatelessWidget {
             primarySwatch: Colors.purple,
             accentColor: Colors.deepOrange,
             fontFamily: 'Lato'),
-        home: ProductOverviewScreen(),
+        home: AuthScreen(),
         routes: {
           //'/': (ctx) => ProductOverviewScreen(),
           ProductDetailsScreen.ROUTE_NAME: (ctx) => ProductDetailsScreen(),
