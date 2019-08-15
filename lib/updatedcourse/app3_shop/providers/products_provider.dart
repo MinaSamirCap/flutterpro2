@@ -10,8 +10,9 @@ class ProductsProvider with ChangeNotifier {
   List<Product> _items = []; // = dummyProducts;
 
   final String authToken;
+  final String userId;
 
-  ProductsProvider(this.authToken, this._items);
+  ProductsProvider(this.authToken, this.userId, this._items);
   //var _showFavoritesOnly = false;
 
   /// must return a copy of list for data consistant ..
@@ -44,9 +45,13 @@ class ProductsProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+
+    /// DO NOT FORGET --> you need to change firebase rules to allow the query to run &orderBy="creatorId"&equalTo="$userId"
     final url =
-        'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken';
+        'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken&$filterString';
 
     try {
       final response = await http.get(url);
@@ -55,6 +60,11 @@ class ProductsProvider with ChangeNotifier {
       if (extractedData == null) {
         return;
       }
+
+      final favUrl =
+          'https://fluttersetup-88480.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
+      final favResponse = await http.get(favUrl);
+      final favData = json.decode(favResponse.body);
       extractedData.forEach((prodId, prodData) {
         loadedProduct.add(Product(
             id: prodId,
@@ -62,7 +72,7 @@ class ProductsProvider with ChangeNotifier {
             description: prodData['description'],
             imageUrl: prodData['imageUrl'],
             price: prodData['price'],
-            isFavorite: prodData['isFavorite']));
+            isFavorite: favData == null ? false : favData[prodId] ?? false));
       });
       _items = loadedProduct;
       notifyListeners();
@@ -72,7 +82,8 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> addProduct(Product newProduct) async {
-    final url = 'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken';
+    final url =
+        'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken';
 
     /// the post method will return a future so if I want to execute something after the api calling
     /// I need to add that in the .then() method ...
@@ -85,7 +96,7 @@ class ProductsProvider with ChangeNotifier {
             'description': newProduct.description,
             'imageUrl': newProduct.imageUrl,
             'price': newProduct.price,
-            'isFavorite': newProduct.isFavorite
+            'creatorId': userId,
           }));
 
       final product = Product(
@@ -124,7 +135,8 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = 'https://fluttersetup-88480.firebaseio.com/product/$id.json?auth=$authToken';
+    final url =
+        'https://fluttersetup-88480.firebaseio.com/product/$id.json?auth=$authToken';
     final existingProductIndex = _items.indexWhere((item) => item.id == id);
     var exsitingProduct = _items[existingProductIndex];
     _items.removeWhere((item) => item.id == id);

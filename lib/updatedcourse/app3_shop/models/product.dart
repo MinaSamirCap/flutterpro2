@@ -25,7 +25,7 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteState(String authToken) async {
+  void toggleFavoriteState(String authToken, String userId) async {
     final oldState = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
@@ -36,12 +36,12 @@ class Product with ChangeNotifier {
     /// as the following
 
     final url =
-        'https://fluttersetup-88480.firebaseio.com/product/$id.json?auth=$authToken';
+        'https://fluttersetup-88480.firebaseio.com/userFavorites/$userId/$id.json?auth=$authToken';
     try {
-      final response = await http.patch(url,
-          body: json.encode({
-            'isFavorite': isFavorite,
-          }));
+      final response = await http.put(url,
+          body: json.encode(
+            isFavorite,
+          ));
       if (response.statusCode >= 400) {
         throw HttpException('Can not mark as facorite now .. !!');
       }

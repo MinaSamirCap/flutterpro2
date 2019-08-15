@@ -42,7 +42,7 @@ class ShopApp extends StatelessWidget {
         /// ChangeNotifierProxyProvider3 , 4, 5 up to 6
 
         ChangeNotifierProxyProvider<Auth, ProductsProvider>(
-          builder: (ctx, auth, previousProducts) => ProductsProvider(auth.token,
+          builder: (ctx, auth, previousProducts) => ProductsProvider(auth.token, auth.userId,
               /*previousProducts.items == null ? [] : previousProducts.items*/ []),
         ),
         ChangeNotifierProvider.value(
