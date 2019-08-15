@@ -7,6 +7,7 @@ import 'package:flutter_course_2/updatedcourse/app3_shop/screens/auth-screen.dar
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/cart_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/edit_product_screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/order_screen.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/screens/splash-screen.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/user_product_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/screens/product_details_screen.dart';
@@ -42,7 +43,8 @@ class ShopApp extends StatelessWidget {
         /// ChangeNotifierProxyProvider3 , 4, 5 up to 6
 
         ChangeNotifierProxyProvider<Auth, ProductsProvider>(
-          builder: (ctx, auth, previousProducts) => ProductsProvider(auth.token, auth.userId,
+          builder: (ctx, auth, previousProducts) => ProductsProvider(
+              auth.token, auth.userId,
               /*previousProducts.items == null ? [] : previousProducts.items*/ []),
         ),
         ChangeNotifierProvider.value(
@@ -61,7 +63,16 @@ class ShopApp extends StatelessWidget {
                     primarySwatch: Colors.purple,
                     accentColor: Colors.deepOrange,
                     fontFamily: 'Lato'),
-                home: auth.isAuth ? ProductOverviewScreen() : AuthScreen(),
+                home: auth.isAuth
+                    ? ProductOverviewScreen()
+                    : FutureBuilder(
+                        future: auth.tryAutoLogin(),
+                        builder: (ctx, authResultSnapshot) =>
+                            authResultSnapshot.connectionState ==
+                                    ConnectionState.waiting
+                                ? SplashScreen()
+                                : AuthScreen(),
+                      ),
                 routes: {
                   //'/': (ctx) => ProductOverviewScreen(),
                   ProductDetailsScreen.ROUTE_NAME: (ctx) =>
