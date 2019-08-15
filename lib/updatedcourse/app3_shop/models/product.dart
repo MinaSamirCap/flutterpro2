@@ -25,7 +25,7 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteState() async {
+  void toggleFavoriteState(String authToken) async {
     final oldState = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
@@ -35,7 +35,8 @@ class Product with ChangeNotifier {
     /// you have to extract the response status code by your self ...
     /// as the following
 
-    final url = 'https://fluttersetup-88480.firebaseio.com/product/$id.json';
+    final url =
+        'https://fluttersetup-88480.firebaseio.com/product/$id.json?auth=$authToken';
     try {
       final response = await http.patch(url,
           body: json.encode({

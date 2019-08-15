@@ -7,8 +7,11 @@ import 'package:http/http.dart' as http; // to avoid crashing with names ..
 import '../dummy_data.dart';
 
 class ProductsProvider with ChangeNotifier {
-  List<Product> _items; // = dummyProducts;
+  List<Product> _items = []; // = dummyProducts;
 
+  final String authToken;
+
+  ProductsProvider(this.authToken, this._items);
   //var _showFavoritesOnly = false;
 
   /// must return a copy of list for data consistant ..
@@ -42,7 +45,8 @@ class ProductsProvider with ChangeNotifier {
   // }
 
   Future<void> fetchAndSetProducts() async {
-    const url = 'https://fluttersetup-88480.firebaseio.com/product.json';
+    final url =
+        'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken';
 
     try {
       final response = await http.get(url);
@@ -68,7 +72,7 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> addProduct(Product newProduct) async {
-    const url = 'https://fluttersetup-88480.firebaseio.com/product.json';
+    final url = 'https://fluttersetup-88480.firebaseio.com/product.json?auth=$authToken';
 
     /// the post method will return a future so if I want to execute something after the api calling
     /// I need to add that in the .then() method ...
@@ -103,7 +107,7 @@ class ProductsProvider with ChangeNotifier {
 
     if (proIndex >= 0) {
       final url =
-          'https://fluttersetup-88480.firebaseio.com/product/${product.id}.json';
+          'https://fluttersetup-88480.firebaseio.com/product/${product.id}.json?auth=$authToken';
       await http.patch(url,
           body: json.encode({
             'title': product.title,
@@ -120,7 +124,7 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = 'https://fluttersetup-88480.firebaseio.com/product/$id.json';
+    final url = 'https://fluttersetup-88480.firebaseio.com/product/$id.json?auth=$authToken';
     final existingProductIndex = _items.indexWhere((item) => item.id == id);
     var exsitingProduct = _items[existingProductIndex];
     _items.removeWhere((item) => item.id == id);
