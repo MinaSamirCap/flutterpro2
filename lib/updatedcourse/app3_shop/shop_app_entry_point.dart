@@ -49,7 +49,7 @@ class ShopApp extends StatelessWidget {
           value: Cart(),
         ),
         ChangeNotifierProxyProvider<Auth, Order>(
-          builder: (ctx, auth, previousOrder) => Order(auth.token,
+          builder: (ctx, auth, previousOrder) => Order(auth.token, auth.userId,
               /*previousOrder.orders == null ? [] : previousOrder.orders*/ []),
         )
       ],
