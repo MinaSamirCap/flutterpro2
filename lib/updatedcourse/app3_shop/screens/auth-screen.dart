@@ -87,6 +87,39 @@ class AuthScreen extends StatelessWidget {
 /// 1- You need a StatefulWidge to animate because animation depends on widge state to animage ...
 ///     because flutter update the screen every 16 milli sceond and to rebuild the screen again 
 ///     more that one time --- we need a stateful widget .. :) logic ..;)
+/// ==> here we will animage the height so we can make it manaually with changeing height with timer
+///     but thankfully flutter provide us with a lot of apis that make it easy for us .. :):).
+/// 
+/// 2- We need to create AnimationController --> to control animation to enable us to start, revert ..
+///     or cancel ... etc.
+///     The AnimationController needs at least two values -->
+///     1) AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+///     the vsync --> refers to the widget that will be animated and this for optimize issue to only
+///     animate when the widget is visible to screen and that will enforce the State class of the 
+///     widget to mixIn with the  SingleTickerProviderStateMixin --> to know the state ...
+///     2) Duration to know the duration of animation ..
+/// 
+/// 3- We need to create Animation object it self --> here we will animate size so, --> Animation<Size>
+///     We will use the Tween Class becuase it is know who to animate between two valuse and since we will
+///     animate size so the Tween will be like this Tween<Size>(); then I add begin and end of the size
+///     then I must call .animate() to add more info about the animation it self ..
+///     .animate(CurvedAnimation(parent: _controller, curve: Curves.linear)); 
+///     1) I passed the parent that will be the controller of our animation.
+///     2) for curve --> we need to tell animation how exactly we want to animat like linear or
+///     spead then slow or slow then speed ... as we like :) :).
+/// 
+/// 4- We need to setup both objects in initState()
+/// 5- Connect animation with your widget ..
+/// 6- Use the controller to start and reverst the animation as you want with user clicks or something else.
+/// 
+/// 7- We must add listener to call setState on it to redraw the screen.
+///     _heightAnimation.addListener(() => setState(() {}));
+/// 
+/// 8- Now the animation is working perfectly but we need to clear the memory in dispose as we added
+///     the listener --> _controller.dispose();
+///     NOTE:: the listener added to the animation it self and disposed by the controller .. :):).
+/// 
+/// KEEP IN MIND --> the rebuild runs with each frame .. so make sure you run the things that really need  update.
 
 
 class AuthCard extends StatefulWidget {
