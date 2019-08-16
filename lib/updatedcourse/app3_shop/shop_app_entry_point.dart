@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2/updatedcourse/app3_shop/helpers/custom_route.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/auth_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/cart_provider.dart';
 import 'package:flutter_course_2/updatedcourse/app3_shop/providers/order_provider.dart';
@@ -62,6 +63,10 @@ class ShopApp extends StatelessWidget {
                 theme: ThemeData(
                     primarySwatch: Colors.purple,
                     accentColor: Colors.deepOrange,
+                    pageTransitionsTheme: PageTransitionsTheme(builders: {
+                      TargetPlatform.android: CustomPageTransitionBuilder(),
+                      TargetPlatform.iOS: CustomPageTransitionBuilder(),
+                    }),
                     fontFamily: 'Lato'),
                 home: auth.isAuth
                     ? ProductOverviewScreen()
