@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_course_2/pages/home.dart';
+import 'package:flutter_course_2/updatedcourse/app4_places/placea_app_entry_point.dart';
 
 import 'package:flutter_course_2/updatedcourse/quiz.dart';
 import 'package:flutter_course_2/updatedcourse/result.dart';
@@ -22,7 +23,8 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);*/
   //runApp(MyApp3()); // one line function only ...
   //runApp(MealApp()); // one line function only ...
-  runApp(ShopApp()); // one line function only ...
+  //runApp(ShopApp()); // one line function only ...
+  runApp(PlacesApp()); // one line function only ...
 
   //////////////// the new updated course start from lesson 2
 }
