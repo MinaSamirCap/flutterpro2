@@ -34,6 +34,7 @@ dev_dependencies:
   image_picker: ^0.6.1+3
   path_provider: ^1.1.0 # this for providing the path from android and ios
   path: ^1.6.2 # this for conducting the path
+  sqflite: ^1.1.6+3
 
 
 # For information on the generic Dart part of this file, see the
