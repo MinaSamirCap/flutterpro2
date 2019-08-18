@@ -26,13 +26,13 @@ class _BattaryHomePageState extends State<BattaryHomePage> {
 
     /// MethodChannel is to create a channel between the platform and flutter
     /// MethodChannel needs a unique identifier ber application for communication like below ..
-    const platform = MethodChannel('course.flutter.dev/battary');
+    const platform = MethodChannel('course.flutter.dev/battery');
 
     try {
       /// with the platform object that we have just created
       /// we will invoke a method through that channel .. and we pass the
       /// name of the method and arguments if we want to pass argument ...
-      final battaryLevel = await platform.invokeMethod('getBattaryLevel');
+      final battaryLevel = await platform.invokeMethod('getBatteryLevel');
       setState(() {
         _battaryLevel = battaryLevel;
       });
