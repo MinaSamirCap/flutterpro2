@@ -36,6 +36,7 @@ dev_dependencies:
   path: ^1.6.2 # this for conducting the path
   sqflite: ^1.1.6+3
   location: ^2.3.5
+  google_maps_flutter: ^0.5.20+3
 
 
 # For information on the generic Dart part of this file, see the
