@@ -14,7 +14,7 @@
                                           binaryMessenger: controller];
 
 
-  __weak typeof(self) weakSelf = self
+  __weak typeof(self) weakSelf = self;
   [batteryChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result){
 
     if([@"getBatteryLevel" isEqualToString:call.method]){
