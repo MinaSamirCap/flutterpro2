@@ -31,7 +31,7 @@
       result(FlutterMethodNotImplemented);
     }
 
-  }]
+  }];
 
   [GMSServices provideAPIKey:@"AIzaSyBPhzvG7Q-_kEVZen7Z23jmrnSsnDeww40"];
   [GeneratedPluginRegistrant registerWithRegistry:self];
